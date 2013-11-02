@@ -59,8 +59,45 @@ void moveForwardInches(int speed, int inches, bool isReversed = false, bool enco
 
 void moveBackwardInches(int speed, int inches, bool isReversed = false, bool encoder = RIGHTENCODER){
 	clearEncoders();
+	int ticsToMove = encoderTicsPerInch * inches;
+	int encoderPosition = 0;
 
 	if(encoder == RIGHTENCODER) while(encoderPosition<= ticsToMove){
+
+		encoderPosition = nMotorEncoder[rightDrive];
+		if(isReversed) encoderPosition = -encoderPosition;
+		startBackward(speed);
+	}
+	else while(encoderPosition<= ticsToMove){
+		encoderPosition = nMotorEncoder[leftDrive];
+		if(isReversed) encoderPosition = -encoderPosition;
+		startBackward(speed);
+	}
+}
+
+void moveForwardTics(int speed, int ticsToMove, bool isReversed = false, bool encoder = RIGHTENCODER){
+	clearEncoders();
+	int encoderPosition = 0;
+
+	if(encoder == RIGHTENCODER) while(encoderPosition<= ticsToMove){
+		encoderPosition = nMotorEncoder[rightDrive];
+		if(isReversed) encoderPosition = -encoderPosition;
+		startForward(speed);
+	}
+	else while(encoderPosition<= ticsToMove){
+		encoderPosition = nMotorEncoder[leftDrive];
+		if(isReversed) encoderPosition = -encoderPosition;
+		startForward(speed);
+	}
+
+}
+
+void moveBackwardTics(int speed, int ticsToMove, bool isReversed = false, bool encoder = RIGHTENCODER){
+	clearEncoders();
+	int encoderPosition = 0;
+
+	if(encoder == RIGHTENCODER) while(encoderPosition<= ticsToMove){
+
 		encoderPosition = nMotorEncoder[rightDrive];
 		if(isReversed) encoderPosition = -encoderPosition;
 		startBackward(speed);
