@@ -4,9 +4,9 @@
 #define RIGHTENCODER true
 
 //conversion of encoder tics to inches
-//114.6 motor tics = 1 inch
+//111 motor tics = 1 inch  WITH PID TURNED ON!!
 
-const float encoderTicsPerInch = 114.6;
+const float encoderTicsPerInch = 111;
 
 //list of prototypes
 void clearEncoders();
@@ -40,6 +40,8 @@ void stopDrive(){
 // Turning code located in pidturn.h
 
 void moveForwardInches(int speed, int inches, bool isReversed = false, bool encoder = RIGHTENCODER){
+	nMotorPIDSpeedCtrl[pidTurn.leftMotor] = mtrSpeedReg;
+	nMotorPIDSpeedCtrl[pidTurn.rightMotor] = mtrSpeedReg;
 	clearEncoders();
 	int ticsToMove = encoderTicsPerInch * inches;
 	int encoderPosition = 0;
@@ -54,28 +56,33 @@ void moveForwardInches(int speed, int inches, bool isReversed = false, bool enco
 		if(isReversed) encoderPosition = -encoderPosition;
 		startForward(speed);
 	}
-
+	stopDrive();
 }
 
 void moveBackwardInches(int speed, int inches, bool isReversed = false, bool encoder = RIGHTENCODER){
+	nMotorPIDSpeedCtrl[pidTurn.leftMotor] = mtrSpeedReg;
+	nMotorPIDSpeedCtrl[pidTurn.rightMotor] = mtrSpeedReg;
 	clearEncoders();
 	int ticsToMove = encoderTicsPerInch * inches;
 	int encoderPosition = 0;
 
-	if(encoder == RIGHTENCODER) while(encoderPosition<= ticsToMove){
+	if(encoder == RIGHTENCODER) while(encoderPosition >= -ticsToMove){
 
 		encoderPosition = nMotorEncoder[rightDrive];
 		if(isReversed) encoderPosition = -encoderPosition;
 		startBackward(speed);
 	}
-	else while(encoderPosition<= ticsToMove){
+	else while(encoderPosition >= -ticsToMove){
 		encoderPosition = nMotorEncoder[leftDrive];
 		if(isReversed) encoderPosition = -encoderPosition;
 		startBackward(speed);
 	}
+	stopDrive();
 }
 
 void moveForwardTics(int speed, int ticsToMove, bool isReversed = false, bool encoder = RIGHTENCODER){
+	nMotorPIDSpeedCtrl[pidTurn.leftMotor] = mtrSpeedReg;
+	nMotorPIDSpeedCtrl[pidTurn.rightMotor] = mtrSpeedReg;
 	clearEncoders();
 	int encoderPosition = 0;
 
@@ -89,11 +96,14 @@ void moveForwardTics(int speed, int ticsToMove, bool isReversed = false, bool en
 		if(isReversed) encoderPosition = -encoderPosition;
 		startForward(speed);
 	}
-
+	stopDrive();
 }
 
 void moveBackwardTics(int speed, int ticsToMove, bool isReversed = false, bool encoder = RIGHTENCODER){
+	nMotorPIDSpeedCtrl[pidTurn.leftMotor] = mtrSpeedReg;
+	nMotorPIDSpeedCtrl[pidTurn.rightMotor] = mtrSpeedReg;
 	clearEncoders();
+	encoder = RIGHTENCODER;
 	int encoderPosition = 0;
 
 	if(encoder == RIGHTENCODER) while(encoderPosition<= ticsToMove){
@@ -104,9 +114,10 @@ void moveBackwardTics(int speed, int ticsToMove, bool isReversed = false, bool e
 	}
 	else while(encoderPosition<= ticsToMove){
 		encoderPosition = nMotorEncoder[leftDrive];
-		if(isReversed) encoderPosition = -encoderPosition;
+		//if(isReversed) encoderPosition = -encoderPosition;
 		startBackward(speed);
 	}
+	stopDrive();
 }
 
 
