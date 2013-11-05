@@ -40,8 +40,8 @@ void stopDrive(){
 // Turning code located in pidturn.h
 
 void moveForwardInches(int speed, int inches, bool isReversed = false, bool encoder = RIGHTENCODER){
-	nMotorPIDSpeedCtrl[pidTurn.leftMotor] = mtrSpeedReg;
-	nMotorPIDSpeedCtrl[pidTurn.rightMotor] = mtrSpeedReg;
+	nMotorPIDSpeedCtrl[leftDrive] = mtrSpeedReg;
+	nMotorPIDSpeedCtrl[rightDrive] = mtrSpeedReg;
 	clearEncoders();
 	int ticsToMove = encoderTicsPerInch * inches;
 	int encoderPosition = 0;
@@ -60,8 +60,8 @@ void moveForwardInches(int speed, int inches, bool isReversed = false, bool enco
 }
 
 void moveBackwardInches(int speed, int inches, bool isReversed = false, bool encoder = RIGHTENCODER){
-	nMotorPIDSpeedCtrl[pidTurn.leftMotor] = mtrSpeedReg;
-	nMotorPIDSpeedCtrl[pidTurn.rightMotor] = mtrSpeedReg;
+	nMotorPIDSpeedCtrl[leftDrive] = mtrSpeedReg;
+	nMotorPIDSpeedCtrl[rightDrive] = mtrSpeedReg;
 	clearEncoders();
 	int ticsToMove = encoderTicsPerInch * inches;
 	int encoderPosition = 0;
@@ -81,8 +81,8 @@ void moveBackwardInches(int speed, int inches, bool isReversed = false, bool enc
 }
 
 void moveForwardTics(int speed, int ticsToMove, bool isReversed = false, bool encoder = RIGHTENCODER){
-	nMotorPIDSpeedCtrl[pidTurn.leftMotor] = mtrSpeedReg;
-	nMotorPIDSpeedCtrl[pidTurn.rightMotor] = mtrSpeedReg;
+	nMotorPIDSpeedCtrl[leftDrive] = mtrSpeedReg;
+	nMotorPIDSpeedCtrl[leftDrive] = mtrSpeedReg;
 	clearEncoders();
 	int encoderPosition = 0;
 
@@ -100,8 +100,8 @@ void moveForwardTics(int speed, int ticsToMove, bool isReversed = false, bool en
 }
 
 void moveBackwardTics(int speed, int ticsToMove, bool isReversed = false, bool encoder = RIGHTENCODER){
-	nMotorPIDSpeedCtrl[pidTurn.leftMotor] = mtrSpeedReg;
-	nMotorPIDSpeedCtrl[pidTurn.rightMotor] = mtrSpeedReg;
+	nMotorPIDSpeedCtrl[leftDrive] = mtrSpeedReg;
+	nMotorPIDSpeedCtrl[rightDrive] = mtrSpeedReg;
 	clearEncoders();
 	encoder = RIGHTENCODER;
 	int encoderPosition = 0;
