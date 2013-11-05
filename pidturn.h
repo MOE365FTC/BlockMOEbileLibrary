@@ -74,6 +74,9 @@ bool PidTurnTask(PIDTURN &pidTurn)
 void turn(PIDTURN &pidTurn, float degrees){
 	//nMotorPIDSpeedCtrl[pidTurn.leftMotor] = mtrNoReg;
 	//nMotorPIDSpeedCtrl[pidTurn.rightMotor] = mtrNoReg;
+	nMotorPIDSpeedCtrl[leftDrive] = mtrNoReg;
+	nMotorPIDSpeedCtrl[rightDrive] = mtrNoReg;
+
 	GyroReset(*pidTurn.gyro);
 	PidTurnSetTarget(pidTurn, degrees);
 	while(pidTurn.enabled){
