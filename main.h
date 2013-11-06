@@ -5,6 +5,7 @@
 
 //conversion of encoder tics to inches
 //111 motor tics = 1 inch  WITH PID TURNED ON!!
+//114.6 motor tics = 1 inch with PID turned OFF.
 
 const float encoderTicsPerInch = 111;
 
