@@ -71,9 +71,26 @@ bool PidTurnTask(PIDTURN &pidTurn)
 	return pidTurn.enabled;
 }
 
+void turn(PIDTURN &pidTurn, float degrees, int minTurnPower){
+	//nMotorPIDSpeedCtrl[pidTurn.leftMotor] = mtrNoReg;
+	//nMotorPIDSpeedCtrl[pidTurn.rightMotor] = mtrNoReg;
+	pidTurn.minTurnPower = minTurnPower;
+	nMotorPIDSpeedCtrl[leftDrive] = mtrNoReg;
+	nMotorPIDSpeedCtrl[rightDrive] = mtrNoReg;
+
+	GyroReset(*pidTurn.gyro);
+	PidTurnSetTarget(pidTurn, degrees);
+	while(pidTurn.enabled){
+		GyroTask(*pidTurn.gyro);
+		PidTurnTask(pidTurn);
+		wait1Msec(20);
+	}
+}
+
 void turn(PIDTURN &pidTurn, float degrees){
 	//nMotorPIDSpeedCtrl[pidTurn.leftMotor] = mtrNoReg;
 	//nMotorPIDSpeedCtrl[pidTurn.rightMotor] = mtrNoReg;
+
 	nMotorPIDSpeedCtrl[leftDrive] = mtrNoReg;
 	nMotorPIDSpeedCtrl[rightDrive] = mtrNoReg;
 
