@@ -107,13 +107,13 @@ void moveBackwardTics(int speed, int ticsToMove, bool isReversed = false, bool e
 	encoder = RIGHTENCODER;
 	int encoderPosition = 0;
 
-	if(encoder == RIGHTENCODER) while(encoderPosition<= ticsToMove){
+	if(encoder == RIGHTENCODER) while(encoderPosition >= -ticsToMove){
 
 		encoderPosition = nMotorEncoder[rightDrive];
 		if(isReversed) encoderPosition = -encoderPosition;
 		startBackward(speed);
 	}
-	else while(encoderPosition<= ticsToMove){
+	else while(encoderPosition >= -ticsToMove){
 		encoderPosition = nMotorEncoder[leftDrive];
 		//if(isReversed) encoderPosition = -encoderPosition;
 		startBackward(speed);
