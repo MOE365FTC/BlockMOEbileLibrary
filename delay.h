@@ -67,6 +67,7 @@ bool leftArrowDisplay = false;
 		wait1Msec(15);
 		if(nNxtButtonPressed == ORANGE_BUTTON) break;
 	}
+	eraseDisplay();
 	return timeToWait;
 }
 
