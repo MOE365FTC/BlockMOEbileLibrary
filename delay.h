@@ -15,7 +15,7 @@ const int LEFT_BUTTON = 2;
 const int ORANGE_BUTTON = 3;
 const int DARK_BUTTON = 0;
 
-void dynamicDelay(){
+int requestTimeToWait(){
 //Variables for program
 int timeToWait = 0;
 bool rightArrowDisplay = true;
@@ -67,8 +67,7 @@ bool leftArrowDisplay = false;
 		wait1Msec(15);
 		if(nNxtButtonPressed == ORANGE_BUTTON) break;
 	}
-	countdown(timeToWait);
-	nxtDisplayCenteredBigTextLine(4,"DONE");//Tests break
+	return timeToWait;
 }
 
 void countdown(int timeToWait){
