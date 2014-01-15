@@ -60,6 +60,26 @@ void moveForwardInches(int speed, int inches, bool isReversed = false, bool enco
 	stopDrive();
 }
 
+
+void moveForwardInchesNoReset(int speed, int inches, bool isReversed = false, bool encoder = RIGHTENCODER){
+	nMotorPIDSpeedCtrl[leftDrive] = mtrSpeedReg;
+	nMotorPIDSpeedCtrl[rightDrive] = mtrSpeedReg;
+	int ticsToMove = encoderTicsPerInch * inches;
+	int encoderPosition = 0;
+
+	if(encoder == RIGHTENCODER) while(encoderPosition<= ticsToMove){
+		encoderPosition = nMotorEncoder[rightDrive];
+		if(isReversed) encoderPosition = -encoderPosition;
+		startForward(speed);
+	}
+	else while(encoderPosition<= ticsToMove){
+		encoderPosition = nMotorEncoder[leftDrive];
+		if(isReversed) encoderPosition = -encoderPosition;
+		startForward(speed);
+	}
+	stopDrive();
+}
+
 void moveBackwardInches(int speed, int inches, bool isReversed = false, bool encoder = RIGHTENCODER){
 	nMotorPIDSpeedCtrl[leftDrive] = mtrSpeedReg;
 	nMotorPIDSpeedCtrl[rightDrive] = mtrSpeedReg;
