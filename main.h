@@ -64,16 +64,21 @@ void moveForwardInches(int speed, int inches, bool isReversed = false, bool enco
 void moveForwardInchesNoReset(int speed, int inches, bool isReversed = false, bool encoder = RIGHTENCODER){
 	nMotorPIDSpeedCtrl[leftDrive] = mtrSpeedReg;
 	nMotorPIDSpeedCtrl[rightDrive] = mtrSpeedReg;
+
+	int initialPosition = 0;
+	if(encoder == RIGHTENCODER) initialPosition = nMotorEncoder[rightDrive];
+	else if(encoder == LEFTENCODER) initialPosition = nMotorEncoder[leftDrive];
+
 	int ticsToMove = encoderTicsPerInch * inches;
 	int encoderPosition = 0;
 
 	if(encoder == RIGHTENCODER) while(encoderPosition<= ticsToMove){
-		encoderPosition = nMotorEncoder[rightDrive];
+		encoderPosition = nMotorEncoder[rightDrive] - initialPosition;
 		if(isReversed) encoderPosition = -encoderPosition;
 		startForward(speed);
 	}
 	else while(encoderPosition<= ticsToMove){
-		encoderPosition = nMotorEncoder[leftDrive];
+		encoderPosition = nMotorEncoder[leftDrive] - initialPosition;
 		if(isReversed) encoderPosition = -encoderPosition;
 		startForward(speed);
 	}
@@ -105,17 +110,21 @@ void moveBackwardInches(int speed, int inches, bool isReversed = false, bool enc
 void moveBackwardInchesNoReset(int speed, int inches, bool isReversed = false, bool encoder = RIGHTENCODER){
 	nMotorPIDSpeedCtrl[leftDrive] = mtrSpeedReg;
 	nMotorPIDSpeedCtrl[rightDrive] = mtrSpeedReg;
+
+	int initialPosition = 0;
+	if(encoder == RIGHTENCODER) initialPosition = nMotorEncoder[rightDrive];
+	else if(encoder == LEFTENCODER) initialPosition = nMotorEncoder[leftDrive];
+
 	int ticsToMove = encoderTicsPerInch * inches;
 	int encoderPosition = 0;
 
 	if(encoder == RIGHTENCODER) while(encoderPosition >= -ticsToMove){
-
-		encoderPosition = nMotorEncoder[rightDrive];
+		encoderPosition = nMotorEncoder[rightDrive] - initialPosition;
 		if(isReversed) encoderPosition = -encoderPosition;
 		startBackward(speed);
 	}
 	else while(encoderPosition >= -ticsToMove){
-		encoderPosition = nMotorEncoder[leftDrive];
+		encoderPosition = nMotorEncoder[leftDrive] - initialPosition;
 		if(isReversed) encoderPosition = -encoderPosition;
 		startBackward(speed);
 	}
