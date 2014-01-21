@@ -162,5 +162,4 @@ void loadPreferences(){
 	{
 		//variables here
 	}
-	nxtDisplayCenteredBigTextLine(4,"DONE LOADING", NULL);
 }
