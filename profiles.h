@@ -1,5 +1,5 @@
 #pragma systemfile
-#include "joystickdriver.c"
+#include "joystickdriver.c";
 //list of commands
 int requestPrimaryProfile();
 int requestSecondaryProfile();
@@ -25,14 +25,13 @@ bool rightArrowDisplay = true;
 bool leftArrowDisplay = false;
 
 int requestPrimaryProfile(){
+	disableDiagnosticsDisplay();
+	eraseDisplay();
 	if(primaryProfile == 0) primaryProfileString = "Matt";
 	else if (primaryProfile == 1) primaryProfileString = "Emma";
 	else if (primaryProfile == 2) primaryProfileString = "Sam";
-	else if (secondaryProfile == 3) primaryProfileString = "Kyle";
-
-	disableDiagnosticsDisplay();
-	eraseDisplay();
-	nxtDisplayCenteredBigTextLine(4,"Delay:%d", primaryProfileString);
+	else if (primaryProfile == 3) primaryProfileString = "Kyle";
+	nxtDisplayCenteredBigTextLine(4,primaryProfileString);
 	while(true){
 		if(primaryProfile != 0) nxtDisplayBigStringAt(LEFT_X, BOTTOM_Y, "<");
 		if(primaryProfile != 3) nxtDisplayBigStringAt(RIGHT_X, BOTTOM_Y, ">");
@@ -45,7 +44,11 @@ int requestPrimaryProfile(){
 				primaryProfile = 3;
 				rightArrowDisplay = false;
 			}
-			nxtDisplayCenteredBigTextLine(4,"Delay:%d", primaryProfileString);
+			if(primaryProfile == 0) primaryProfileString = "Matt";
+			else if (primaryProfile == 1) primaryProfileString = "Emma";
+			else if (primaryProfile == 2) primaryProfileString = "Sam";
+			else if (primaryProfile == 3) primaryProfileString = "Kyle";
+			nxtDisplayCenteredBigTextLine(4,primaryProfileString);
 			wait1Msec(250);
 		}
 
@@ -57,7 +60,11 @@ int requestPrimaryProfile(){
 				primaryProfile = 0;
 				leftArrowDisplay = false;
 			}
-			nxtDisplayCenteredBigTextLine(4,"Delay:%d", primaryProfileString);
+			if(primaryProfile == 0) primaryProfileString = "Matt";
+			else if (primaryProfile == 1) primaryProfileString = "Emma";
+			else if (primaryProfile == 2) primaryProfileString = "Sam";
+			else if (primaryProfile == 3) primaryProfileString = "Kyle";
+			nxtDisplayCenteredBigTextLine(4,primaryProfileString);
 			wait1Msec(250);
 		}
 		if(leftArrowDisplay == false){//turns off left arrow when time = 0
@@ -77,14 +84,13 @@ int requestPrimaryProfile(){
 	return primaryProfile;
 }
 int requestSecondaryProfile(){
+	disableDiagnosticsDisplay();
+	eraseDisplay();
 	if(secondaryProfile == 0) secondaryProfileString = "Arnav";
 	else if (secondaryProfile == 1) secondaryProfileString = "Josh";
 	else if (secondaryProfile == 2) secondaryProfileString = "Noah";
 	else if (secondaryProfile == 3) secondaryProfileString = "Jack";
-
-	disableDiagnosticsDisplay();
-	eraseDisplay();
-	nxtDisplayCenteredBigTextLine(4,"Delay:%d", secondaryProfileString);
+	nxtDisplayCenteredBigTextLine(4,secondaryProfileString);
 	while(true){
 		if(secondaryProfile != 0) nxtDisplayBigStringAt(LEFT_X, BOTTOM_Y, "<");
 		if(secondaryProfile != 3) nxtDisplayBigStringAt(RIGHT_X, BOTTOM_Y, ">");
@@ -97,7 +103,11 @@ int requestSecondaryProfile(){
 				secondaryProfile = 3;
 				rightArrowDisplay = false;
 			}
-			nxtDisplayCenteredBigTextLine(4,"Delay:%d", secondaryProfileString);
+			if(secondaryProfile == 0) secondaryProfileString = "Arnav";
+			else if (secondaryProfile == 1) secondaryProfileString = "Josh";
+			else if (secondaryProfile == 2) secondaryProfileString = "Noah";
+			else if (secondaryProfile == 3) secondaryProfileString = "Jack";
+			nxtDisplayCenteredBigTextLine(4,secondaryProfileString);
 			wait1Msec(250);
 		}
 
@@ -109,7 +119,11 @@ int requestSecondaryProfile(){
 				secondaryProfile = 0;
 				leftArrowDisplay = false;
 			}
-			nxtDisplayCenteredBigTextLine(4,"Delay:%d", secondaryProfileString);
+			if(secondaryProfile == 0) secondaryProfileString = "Arnav";
+			else if (secondaryProfile == 1) secondaryProfileString = "Josh";
+			else if (secondaryProfile == 2) secondaryProfileString = "Noah";
+			else if (secondaryProfile == 3) secondaryProfileString = "Jack";
+			nxtDisplayCenteredBigTextLine(4,secondaryProfileString);
 			wait1Msec(250);
 		}
 		if(leftArrowDisplay == false){//turns off left arrow when time = 0
