@@ -1,36 +1,30 @@
 #pragma systemfile
+#include "display.h"
 #include "joystickdriver.c";
 //list of commands
 int requestPrimaryProfile();
 int requestSecondaryProfile();
+void getPrimaryDriverName();
+void getSecondaryDriverName();
 void loadPreferences();
-//Constants for Screen coordinates
-const int LEFT_X = 3;
-const int RIGHT_X = 85;
-const int BOTTOM_Y = 14;
-const int TOP_Y = 60;
-
-//Constants for button definitions
-const int NO_BUTTON = -1;
-const int RIGHT_BUTTON = 1;
-const int LEFT_BUTTON = 2;
-const int ORANGE_BUTTON = 3;
-const int DARK_BUTTON = 0;
-
+//Profile name variables
 int primaryProfile = 0;
 string primaryProfileString = "";
 int secondaryProfile = 0;
 string secondaryProfileString = "";
 bool rightArrowDisplay = true;
 bool leftArrowDisplay = false;
-
+//Variables for drive control
+//
+//
+//
+//
+//
+//
 int requestPrimaryProfile(){
 	disableDiagnosticsDisplay();
 	eraseDisplay();
-	if(primaryProfile == 0) primaryProfileString = "Matt";
-	else if (primaryProfile == 1) primaryProfileString = "Emma";
-	else if (primaryProfile == 2) primaryProfileString = "Sam";
-	else if (primaryProfile == 3) primaryProfileString = "Kyle";
+	getPrimaryDriverName();
 	nxtDisplayCenteredBigTextLine(4,primaryProfileString);
 	while(true){
 		if(primaryProfile != 0) nxtDisplayBigStringAt(LEFT_X, BOTTOM_Y, "<");
@@ -44,12 +38,9 @@ int requestPrimaryProfile(){
 				primaryProfile = 3;
 				rightArrowDisplay = false;
 			}
-			if(primaryProfile == 0) primaryProfileString = "Matt";
-			else if (primaryProfile == 1) primaryProfileString = "Emma";
-			else if (primaryProfile == 2) primaryProfileString = "Sam";
-			else if (primaryProfile == 3) primaryProfileString = "Kyle";
+			getPrimaryDriverName();
 			nxtDisplayCenteredBigTextLine(4,primaryProfileString);
-			wait1Msec(250);
+			wait1Msec(500);
 		}
 
 		if(nNxtButtonPressed == LEFT_BUTTON){//decrease primary profile number and update display
@@ -60,12 +51,9 @@ int requestPrimaryProfile(){
 				primaryProfile = 0;
 				leftArrowDisplay = false;
 			}
-			if(primaryProfile == 0) primaryProfileString = "Matt";
-			else if (primaryProfile == 1) primaryProfileString = "Emma";
-			else if (primaryProfile == 2) primaryProfileString = "Sam";
-			else if (primaryProfile == 3) primaryProfileString = "Kyle";
+			getPrimaryDriverName();
 			nxtDisplayCenteredBigTextLine(4,primaryProfileString);
-			wait1Msec(250);
+			wait1Msec(500);
 		}
 		if(leftArrowDisplay == false){//turns off left arrow when time = 0
 			nxtDisplayClearTextLine(6);
@@ -78,7 +66,10 @@ int requestPrimaryProfile(){
 			nxtDisplayBigStringAt(LEFT_X, BOTTOM_Y, "<");
 		}
 		wait1Msec(15);//refreshing screen
-		if(nNxtButtonPressed == ORANGE_BUTTON) break;//ends selection, goes to delay select
+		if(nNxtButtonPressed == ORANGE_BUTTON){
+			while(nNxtButtonPressed == ORANGE_BUTTON){}//waits for orange button press and release
+			break; //ends selection, goes to secondary driver select
+		}
 	}
 	eraseDisplay();
 	return primaryProfile;
@@ -86,10 +77,7 @@ int requestPrimaryProfile(){
 int requestSecondaryProfile(){
 	disableDiagnosticsDisplay();
 	eraseDisplay();
-	if(secondaryProfile == 0) secondaryProfileString = "Arnav";
-	else if (secondaryProfile == 1) secondaryProfileString = "Josh";
-	else if (secondaryProfile == 2) secondaryProfileString = "Noah";
-	else if (secondaryProfile == 3) secondaryProfileString = "Jack";
+	getSecondaryDriverName();
 	nxtDisplayCenteredBigTextLine(4,secondaryProfileString);
 	while(true){
 		if(secondaryProfile != 0) nxtDisplayBigStringAt(LEFT_X, BOTTOM_Y, "<");
@@ -103,12 +91,9 @@ int requestSecondaryProfile(){
 				secondaryProfile = 3;
 				rightArrowDisplay = false;
 			}
-			if(secondaryProfile == 0) secondaryProfileString = "Arnav";
-			else if (secondaryProfile == 1) secondaryProfileString = "Josh";
-			else if (secondaryProfile == 2) secondaryProfileString = "Noah";
-			else if (secondaryProfile == 3) secondaryProfileString = "Jack";
+			getSecondaryDriverName();
 			nxtDisplayCenteredBigTextLine(4,secondaryProfileString);
-			wait1Msec(250);
+			wait1Msec(500);
 		}
 
 		if(nNxtButtonPressed == LEFT_BUTTON){//decrease primary profile number and update display
@@ -119,12 +104,9 @@ int requestSecondaryProfile(){
 				secondaryProfile = 0;
 				leftArrowDisplay = false;
 			}
-			if(secondaryProfile == 0) secondaryProfileString = "Arnav";
-			else if (secondaryProfile == 1) secondaryProfileString = "Josh";
-			else if (secondaryProfile == 2) secondaryProfileString = "Noah";
-			else if (secondaryProfile == 3) secondaryProfileString = "Jack";
+			getSecondaryDriverName();
 			nxtDisplayCenteredBigTextLine(4,secondaryProfileString);
-			wait1Msec(250);
+			wait1Msec(500);
 		}
 		if(leftArrowDisplay == false){//turns off left arrow when time = 0
 			nxtDisplayClearTextLine(6);
@@ -137,13 +119,33 @@ int requestSecondaryProfile(){
 			nxtDisplayBigStringAt(LEFT_X, BOTTOM_Y, "<");
 		}
 		wait1Msec(15);//refreshing screen
-		if(nNxtButtonPressed == ORANGE_BUTTON) break;//ends selection, goes to delay select
+		if(nNxtButtonPressed == ORANGE_BUTTON){
+			while(nNxtButtonPressed == ORANGE_BUTTON){}//waits for orange button press and release
+			break; //ends selection, goes to delay select
+		}
 	}
 	eraseDisplay();
 	return secondaryProfile;
 }
 
+
+void getPrimaryDriverName(){
+	if(primaryProfile == 0) primaryProfileString = "Emma";
+	else if (primaryProfile == 1) primaryProfileString = "Kyle";
+	else if (primaryProfile == 2) primaryProfileString = "Matt";
+	else if (primaryProfile == 3) primaryProfileString = "Sam";
+}
+
+void getSecondaryDriverName(){
+	if(secondaryProfile == 0) secondaryProfileString = "Arnav";
+	else if (secondaryProfile == 1) secondaryProfileString = "Jack";
+	else if (secondaryProfile == 2) secondaryProfileString = "Josh";
+	else if (secondaryProfile == 3) secondaryProfileString = "Noah";
+}
 void loadPreferences(){
+	nxtDisplayCenteredBigTextLine(1,primaryProfileString);
+	nxtDisplayCenteredBigTextLine(5,secondaryProfileString);
+	wait1Msec(3000);
 	if (primaryProfile == 0)//Matt's preferences
 	{
 		//variables here
