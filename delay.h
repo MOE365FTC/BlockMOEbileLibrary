@@ -22,6 +22,11 @@ bool leftArrowDisplay = false;
 
 		nxtDisplayCenteredTextLine(2, "NXT Batt:%4.1f V", nAvgBatteryLevel / (float) 1000);   // Display NXT Battery Voltage
 
+		 if ( externalBatteryAvg < 0)
+        nxtDisplayCenteredTextLine(3, "Ext Batt: OFF");       //External battery is off or not connected
+      else
+        nxtDisplayCenteredTextLine(3, "Ext Batt:%4.1f V", externalBatteryAvg / (float) 1000);
+
 		if(nNxtButtonPressed == RIGHT_BUTTON){//increase time to wait and display
 			timeToWait ++;
 			leftArrowDisplay = true;
