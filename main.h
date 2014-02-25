@@ -16,8 +16,8 @@ void clearEncoders();
 void startForward(int speed);
 void startBackward(int speed);
 void stopDrive();
-void moveForwardInches(int speed, int inches);
-void moveBackwardInches(int speed, int inches);
+void moveForwardInches(int speed, float inches);
+void moveBackwardInches(int speed, float inches);
 
 
 void clearEncoders(){
@@ -42,7 +42,7 @@ void stopDrive(){
 
 // Turning code located in pidturn.h
 
-void moveForwardInches(int speed, int inches, bool isReversed = false, bool encoder = DEFAULTENCODER){
+void moveForwardInches(int speed, float inches, bool isReversed = false, bool encoder = DEFAULTENCODER){
 	nMotorPIDSpeedCtrl[leftDrive] = mtrSpeedReg;
 	nMotorPIDSpeedCtrl[rightDrive] = mtrSpeedReg;
 	clearEncoders();
@@ -64,7 +64,7 @@ void moveForwardInches(int speed, int inches, bool isReversed = false, bool enco
 }
 
 
-void moveForwardInchesNoReset(int speed, int inches, bool isReversed = false, bool encoder = DEFAULTENCODER){
+void moveForwardInchesNoReset(int speed, float inches, bool isReversed = false, bool encoder = DEFAULTENCODER){
 	nMotorPIDSpeedCtrl[leftDrive] = mtrSpeedReg;
 	nMotorPIDSpeedCtrl[rightDrive] = mtrSpeedReg;
 
@@ -88,7 +88,7 @@ void moveForwardInchesNoReset(int speed, int inches, bool isReversed = false, bo
 	stopDrive();
 }
 
-void moveBackwardInches(int speed, int inches, bool isReversed = false, bool encoder = DEFAULTENCODER){
+void moveBackwardInches(int speed, float inches, bool isReversed = false, bool encoder = DEFAULTENCODER){
 	nMotorPIDSpeedCtrl[leftDrive] = mtrSpeedReg;
 	nMotorPIDSpeedCtrl[rightDrive] = mtrSpeedReg;
 	clearEncoders();
@@ -111,7 +111,7 @@ void moveBackwardInches(int speed, int inches, bool isReversed = false, bool enc
 }
 
 
-void moveBackwardInchesNoReset(int speed, int inches, bool isReversed = false, bool encoder = DEFAULTENCODER){
+void moveBackwardInchesNoReset(int speed, float inches, bool isReversed = false, bool encoder = DEFAULTENCODER){
 	nMotorPIDSpeedCtrl[leftDrive] = mtrSpeedReg;
 	nMotorPIDSpeedCtrl[rightDrive] = mtrSpeedReg;
 
