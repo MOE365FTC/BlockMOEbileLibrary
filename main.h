@@ -3,6 +3,8 @@
 #define LEFTENCODER false
 #define RIGHTENCODER true
 
+#define DEFAULTENCODER LEFTENCODER
+
 //conversion of encoder tics to inches
 //111 motor tics = 1 inch  WITH PID TURNED ON!!
 //114.6 motor tics = 1 inch with PID turned OFF.
@@ -40,7 +42,7 @@ void stopDrive(){
 
 // Turning code located in pidturn.h
 
-void moveForwardInches(int speed, int inches, bool isReversed = false, bool encoder = RIGHTENCODER){
+void moveForwardInches(int speed, int inches, bool isReversed = false, bool encoder = DEFAULTENCODER){
 	nMotorPIDSpeedCtrl[leftDrive] = mtrSpeedReg;
 	nMotorPIDSpeedCtrl[rightDrive] = mtrSpeedReg;
 	clearEncoders();
@@ -62,7 +64,7 @@ void moveForwardInches(int speed, int inches, bool isReversed = false, bool enco
 }
 
 
-void moveForwardInchesNoReset(int speed, int inches, bool isReversed = false, bool encoder = RIGHTENCODER){
+void moveForwardInchesNoReset(int speed, int inches, bool isReversed = false, bool encoder = DEFAULTENCODER){
 	nMotorPIDSpeedCtrl[leftDrive] = mtrSpeedReg;
 	nMotorPIDSpeedCtrl[rightDrive] = mtrSpeedReg;
 
@@ -86,7 +88,7 @@ void moveForwardInchesNoReset(int speed, int inches, bool isReversed = false, bo
 	stopDrive();
 }
 
-void moveBackwardInches(int speed, int inches, bool isReversed = false, bool encoder = RIGHTENCODER){
+void moveBackwardInches(int speed, int inches, bool isReversed = false, bool encoder = DEFAULTENCODER){
 	nMotorPIDSpeedCtrl[leftDrive] = mtrSpeedReg;
 	nMotorPIDSpeedCtrl[rightDrive] = mtrSpeedReg;
 	clearEncoders();
@@ -109,7 +111,7 @@ void moveBackwardInches(int speed, int inches, bool isReversed = false, bool enc
 }
 
 
-void moveBackwardInchesNoReset(int speed, int inches, bool isReversed = false, bool encoder = RIGHTENCODER){
+void moveBackwardInchesNoReset(int speed, int inches, bool isReversed = false, bool encoder = DEFAULTENCODER){
 	nMotorPIDSpeedCtrl[leftDrive] = mtrSpeedReg;
 	nMotorPIDSpeedCtrl[rightDrive] = mtrSpeedReg;
 
@@ -133,7 +135,7 @@ void moveBackwardInchesNoReset(int speed, int inches, bool isReversed = false, b
 	stopDrive();
 }
 
-void moveForwardTics(int speed, int ticsToMove, bool isReversed = false, bool encoder = RIGHTENCODER){
+void moveForwardTics(int speed, int ticsToMove, bool isReversed = false, bool encoder = DEFAULTENCODER){
 	nMotorPIDSpeedCtrl[leftDrive] = mtrSpeedReg;
 	nMotorPIDSpeedCtrl[leftDrive] = mtrSpeedReg;
 	clearEncoders();
@@ -153,7 +155,7 @@ void moveForwardTics(int speed, int ticsToMove, bool isReversed = false, bool en
 	stopDrive();
 }
 
-void moveBackwardTics(int speed, int ticsToMove, bool isReversed = false, bool encoder = RIGHTENCODER){
+void moveBackwardTics(int speed, int ticsToMove, bool isReversed = false, bool encoder = DEFAULTENCODER){
 	nMotorPIDSpeedCtrl[leftDrive] = mtrSpeedReg;
 	nMotorPIDSpeedCtrl[rightDrive] = mtrSpeedReg;
 	clearEncoders();
