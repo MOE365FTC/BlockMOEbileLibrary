@@ -174,7 +174,7 @@ GyroTask(GYRO &gyro)
         }
 #endif
         gyro.heading += (float)gyro.turnRate*(currTime - gyro.prevTime) / 1000;
-        nxtDisplayCenteredTextLine(5, "%d", gyro.heading);
+        displayCenteredTextLine(5, "%d", gyro.heading);
         gyro.prevTime = currTime;
     }
 
@@ -224,7 +224,7 @@ GyroInit(GYRO &gyro, tSensors sensorID, int options = 0)
 
     if (SensorType[sensorID] != sensorAnalogInactive)
     {
-        SetSensorType(sensorID, sensorAnalogInactive);
+        SensorType[sensorID] = sensorAnalogInactive;
         wait1Msec(100);
     }
 

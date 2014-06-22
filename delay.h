@@ -13,19 +13,19 @@ bool leftArrowDisplay = false;
 
 	disableDiagnosticsDisplay();
 	eraseDisplay();
-	nxtDisplayCenteredBigTextLine(4,"Delay:%d", timeToWait);
+	displayCenteredBigTextLine(4,"Delay:%d", timeToWait);
 	while(true)
 	{
-		if(timeToWait != 0) nxtDisplayBigStringAt(LEFT_X, BOTTOM_Y, "<");
-		if(timeToWait != 20) nxtDisplayBigStringAt(RIGHT_X, BOTTOM_Y, ">");
-		nxtDisplayCenteredTextLine(0, "ProgramName");
+		if(timeToWait != 0) displayBigStringAt(LEFT_X, BOTTOM_Y, "<");
+		if(timeToWait != 20) displayBigStringAt(RIGHT_X, BOTTOM_Y, ">");
+		displayCenteredTextLine(0, "ProgramName");
 
-		nxtDisplayCenteredTextLine(2, "NXT Batt:%4.1f V", nAvgBatteryLevel / (float) 1000);   // Display NXT Battery Voltage
+		displayCenteredTextLine(2, "NXT Batt:%4.1f V", nAvgBatteryLevel / (float) 1000);   // Display NXT Battery Voltage
 
 		 if ( externalBatteryAvg < 0)
-        nxtDisplayCenteredTextLine(3, "Ext Batt: OFF");       //External battery is off or not connected
+        displayCenteredTextLine(3, "Ext Batt: OFF");       //External battery is off or not connected
       else
-        nxtDisplayCenteredTextLine(3, "Ext Batt:%4.1f V", externalBatteryAvg / (float) 1000);
+        displayCenteredTextLine(3, "Ext Batt:%4.1f V", externalBatteryAvg / (float) 1000);
 
 		if(nNxtButtonPressed == RIGHT_BUTTON){//increase time to wait and display
 			timeToWait ++;
@@ -35,7 +35,7 @@ bool leftArrowDisplay = false;
 				timeToWait = 20;
 				rightArrowDisplay = false;
 			}
-			nxtDisplayCenteredBigTextLine(4,"Delay:%d", timeToWait);
+			displayCenteredBigTextLine(4,"Delay:%d", timeToWait);
 			wait1Msec(250);
 		}
 		if(nNxtButtonPressed == LEFT_BUTTON){//decrease time to wait and display
@@ -46,18 +46,18 @@ bool leftArrowDisplay = false;
 				timeToWait = 0;
 				leftArrowDisplay = false;
 			}
-			nxtDisplayCenteredBigTextLine(4,"Delay:%d", timeToWait);
+			displayCenteredBigTextLine(4,"Delay:%d", timeToWait);
 			wait1Msec(250);
 		}
 		if(leftArrowDisplay == false){//turns off left arrow when time = 0
-			nxtDisplayClearTextLine(6);
-			nxtDisplayClearTextLine(7);
-			nxtDisplayBigStringAt(RIGHT_X, BOTTOM_Y, ">");
+			displayClearTextLine(6);
+			displayClearTextLine(7);
+			displayBigStringAt(RIGHT_X, BOTTOM_Y, ">");
 		}
 		if(rightArrowDisplay == false){//turns off right arrow when time = 20
-			nxtDisplayClearTextLine(6);
-			nxtDisplayClearTextLine(7);
-			nxtDisplayBigStringAt(LEFT_X, BOTTOM_Y, "<");
+			displayClearTextLine(6);
+			displayClearTextLine(7);
+			displayBigStringAt(LEFT_X, BOTTOM_Y, "<");
 		}
 		wait1Msec(15);//refreshing screen
 		if(nNxtButtonPressed == ORANGE_BUTTON) break;//ends selection, goes to waitforstart
@@ -68,7 +68,7 @@ bool leftArrowDisplay = false;
 
 void countdown(int timeToWait){
 	for(int i = 0; i < timeToWait; i++){
-		PlaySound(soundBeepBeep);
+		playSound(soundBeepBeep);
 		wait1Msec(1000);
 	}
 }

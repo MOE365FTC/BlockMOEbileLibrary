@@ -46,7 +46,7 @@ bool PidTurnTask(PIDTURN &pidTurn)
 	{
 		float error = pidTurn.angle - GyroGetHeading(*pidTurn.gyro);
 
-		nxtDisplayCenteredTextLine(6,"%d", error);
+		displayCenteredTextLine(6,"%d", error);
 		if (abs(error) > pidTurn.tolerance)
 		{
 			int turnPower = BOUND((int)(pidTurn.Kp*error), -100, 100);
@@ -56,7 +56,7 @@ bool PidTurnTask(PIDTURN &pidTurn)
 			-pidTurn.minTurnPower:
 				pidTurn.minTurnPower;
 			}
-			nxtDisplayCenteredTextLine(4, "%d", turnPower);
+			displayCenteredTextLine(4, "%d", turnPower);
 			motor[pidTurn.leftMotor] = turnPower;
 			motor[pidTurn.rightMotor] = -turnPower;
 		}
